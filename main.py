@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from textblob import TextBlob
 from pydantic import BaseModel
+import json
 
 app = FastAPI()
 
@@ -24,5 +25,12 @@ async def get_sentiment(input_text: InputText):
 
 
 @app.get("/")
-def read_root():
-    return {"message": "Hello World - jp1"}
+async def read_root(request: Request):
+    #my_body = await request.body()
+    #return my_body
+    client_host = request.client.host
+    #my_path = request['path']
+    #return my_path
+    #client = json.dumps(request.client)
+    #return client
+    return {"message": "Hello World - jp2", "client_host": client_host}
